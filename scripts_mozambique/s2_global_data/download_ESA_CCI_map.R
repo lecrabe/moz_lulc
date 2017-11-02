@@ -6,7 +6,6 @@
 ####################################################################################################
 ####################################################################################################
 
-options(stringsAsFactors = FALSE)
 
 ###### IMPORTANT --> LICENSE FROM ESA
 #   The present product is made available to the public by ESA and the consortium. 
