@@ -16,6 +16,14 @@ mosaic_name  <- "lsat_2016_zambezia.tif"
 ### TREE COVER THRESHOLD FOR GRC PRODUCT
 gfc_threshold <- 30
 
+### AD grid results
+ad_grid <- paste0(adg_dir,"ad_grid.csv")
+
+### CLASSIFICATION RESULTS
+res_segmode <- paste0(res_dir,"obia_classification_segmode_20171103.tif")
+res_dectree <- paste0(res_dir,"decision_tree.tif")
+the_result  <- res_segmode
+
 ### CREATE A PSEUDO COLOR TABLE
 my_classes <- c(11,12,13,21,22,23,24,25,26,31,32,33,41,42,43,44,45,51,61,62,63)
 my_colors  <- col2rgb(c("brown","yellow","yellow", # agriculture 

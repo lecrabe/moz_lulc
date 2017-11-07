@@ -1,0 +1,37 @@
+nivel1_code,nivel1_label_pt,nivel1_label_en,nivel2_code,nivel2_label_pt,nivel2_label_en,nivel3_code,nivel3_label_pt,nivel3_label_en,int_l2,int_l3,code_l2,code_l3,color
+1,Cultivos,Cropland,1TCF,Cultivos arboreos agricolas,Tree crops,1TCF,Cultivos arboreos agricolas,Tree crops,1,1,11,111,brown light
+1,Cultivos,Cropland,1FC,Cultivos nao arboreos,Field crops,1SCT,Plantacoes de arbustos (cha),Shrub Plantation (Tea),2,1,12,121,yellow
+1,Cultivos,Cropland,1FC,Cultivos nao arboreos,Field crops,1FCR,Cultivado sequeiro,Rainfed field crops,2,2,12,122,yellow
+1,Cultivos,Cropland,1FC,Cultivos nao arboreos,Field crops,1FCI,Cultivado irrigado,Irrigated field crops,2,3,12,123,yellow
+1,Cultivos,Cropland,1FC,Cultivos nao arboreos,Field crops,3AC,Cultivo de arroz,Rice crop,2,4,12,124,yellow
+1,Cultivos,Cropland,1CXF,Agricultura itinerante com areas de florestas abertas e fechadas,Shifting cultivation with open to closed forested areas,1CXF,Agricultura itinerante com areas de florestas abertas e fechadas,Shifting cultivation with open to closed forested areas,3,1,13,131,yellow
+2,Florestas,Forest Land,1TCW,Plantacoes florestais,Forest Plantation,1TCW,Plantacoes florestais,Forest Plantation,1,1,21,211,light green
+2,Florestas,Forest Land,2FXC,Florestas com areas de agricultura itinerante,Forest with shifting cultivation,2FXC,Florestas com areas de agricultura itinerante,Forest with shifting cultivation,2,1,22,221,light green
+2,Florestas,Forest Land,2FE,Floresta (Semi-) sempreverde fechada,Broadleaved (Semi-) evergreen closed forest,2DEC,Floresta costeira densa,Coastal dense woody vegetation,3,1,23,231,purple
+2,Florestas,Forest Land,2FE,Floresta (Semi-) sempreverde fechada,Broadleaved (Semi-) evergreen closed forest,4FF,Mangal denso,Mangrove dense,3,2,23,232,purple
+2,Florestas,Forest Land,2FE,Floresta (Semi-) sempreverde fechada,Broadleaved (Semi-) evergreen closed forest,2FEA,Mecrusse denso,Mecrusse dense,3,3,23,233,purple
+2,Florestas,Forest Land,2FE,Floresta (Semi-) sempreverde fechada,Broadleaved (Semi-) evergreen closed forest,2FEG,Floresta de galeria,Gallery forest,3,4,23,234,purple
+2,Florestas,Forest Land,2FE,Floresta (Semi-) sempreverde fechada,Broadleaved (Semi-) evergreen closed forest,2FEM,Floresta (Semi-) sempreverde de montanha fechada,Closed broadleaved (Semi-) evergreen mountaineous forest,3,5,23,235,purple
+2,Florestas,Forest Land,2FE,Floresta (Semi-) sempreverde fechada,Broadleaved (Semi-) evergreen closed forest,2FE,Floresta (Semi-) sempreverde fechada,Broadleaved (Semi-) evergreen closed forest,3,6,23,236,purple
+2,Florestas,Forest Land,2FD,Floresta (Semi-) decidua fechada,Broadleaved (Semi-) deciduous closed forest,2FDB,Miombo denso,Miombo dense,4,1,24,241,dark green
+2,Florestas,Forest Land,2FD,Floresta (Semi-) decidua fechada,Broadleaved (Semi-) deciduous closed forest,2FDC,Mopane denso,Mopane dense,4,2,24,242,dark green
+2,Florestas,Forest Land,2WE,Floresta (Semi-) sempreverde aberta,Broadleaved (Semi-) evergreen open forest,2DEO,Floresta costeira aberta,Coastal open woody vegetation,5,1,25,251,light purple
+2,Florestas,Forest Land,2WE,Floresta (Semi-) sempreverde aberta,Broadleaved (Semi-) evergreen open forest,4WF,Mangal aberto,Mangrove open,5,2,25,252,light purple
+2,Florestas,Forest Land,2WE,Floresta (Semi-) sempreverde aberta,Broadleaved (Semi-) evergreen open forest,2WEA,Mecrusse aberto,Mecrusse open,5,3,25,253,light purple
+2,Florestas,Forest Land,2WE,Floresta (Semi-) sempreverde aberta,Broadleaved (Semi-) evergreen open forest,2WEM,Floresta (Semi-) sempreverde de montanha aberta,Open broadleaved (Semi-) evergreen mountaineous forest,5,4,25,254,light purple
+2,Florestas,Forest Land,2WD,Floresta (Semi-) decidua aberta,Broadleaved (Semi-) deciduous open forest,2WDC,Mopane aberto,Mopane open,6,1,26,261,green
+2,Florestas,Forest Land,2WD,Floresta (Semi-) decidua aberta,Broadleaved (Semi-) deciduous open forest,2WDB,Miombo aberto,Miombo open,6,2,26,262,green
+3,Pradarias,Grassland,2GL,Pradarias,Grasslands,2GL,Pradarias,Grasslands,1,1,31,311,orange
+3,Pradarias,Grassland,2T,Matagal,Thicket,2TE,Matagal (Semi-) sempreverde,Broadleaved (Semi-) evergreen thicket,2,1,32,321,light green
+3,Pradarias,Grassland,2T,Matagal,Thicket,2TD,Matagal (Semi-) deciduo,Broadleaved (Semi-) deciduous thicket,2,2,32,322,light green
+3,Pradarias,Grassland,2S,Vegetacao arbustiva,Shrubland,2SE,Vegetacao arbustiva (Semi-) sempreverde,Broadleaved (Semi-) evergreen shrubland,3,1,33,331,light green
+3,Pradarias,Grassland,2S,Vegetacao arbustiva,Shrubland,2SD,Vegetacao arbustiva (Semi-) decidua,Broadleaved (Semi-) deciduous shrubland,3,2,33,332,light green
+4,Areas alagadas,Wetlands,4SF,Areas arbustivas permanente ou temporariamente inundadas,Aquatic or regularly flooded shrublands,4SF,Areas arbustivas permanente ou temporariamente inundadas,Aquatic or regularly flooded shrublands,1,1,41,411,light blue
+4,Areas alagadas,Wetlands,4HF,Areas herbaceas permanente ou temporariamente inundadas,Aquatic or regularly flooded herbaceous vegetation,4HF,Areas herbaceas permanente ou temporariamente inundadas,Aquatic or regularly flooded herbaceous vegetation,2,1,42,421,light blue
+4,Areas alagadas,Wetlands,7WB,Corpos de agua artificial,Artificial water bodies,7WB,Corpos de agua artificial,Artificial water bodies,3,1,43,431,dark blue
+4,Areas alagadas,Wetlands,8WB,Corpos de agua naturais,Natural water bodies,8WB,Corpos de agua naturais,Natural water bodies,4,1,44,441,dark blue
+4,Areas alagadas,Wetlands,17,Salinas,Salt lake,17,Salinas,Salt lake,5,1,45,451,grey
+5,Areas urbanas,Settlements,5BU,Areas urbanas,Settlements,5BU,Areas urbanas,Settlements,1,1,51,511,dark red
+6,Outras Terras,Other Land,6BS,Solos nus,Bare soils,6BS,Solos nus,Bare soils,1,2,61,612,grey
+6,Outras Terras,Other Land,6BR,Rochas sem vegetacao,Bare rocks,6BR,Rochas sem vegetacao,Bare rocks,2,1,62,621,grey
+6,Outras Terras,Other Land,6SS,Dunas,Dunes,6SS,Dunas,Dunes,3,1,63,631,light grey
