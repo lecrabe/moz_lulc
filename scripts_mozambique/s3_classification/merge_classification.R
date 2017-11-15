@@ -23,6 +23,14 @@ system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
                ))
 
 #############################################################
+### STATS
+system(sprintf("oft-stat -i %s -o  %s -um %s",
+               paste0(class_dir,classif_name),
+               paste0(class_dir,"stats.txt"),
+               paste0(class_dir,classif_name)
+))
+
+#############################################################
 ### CLEAN
 system(sprintf("rm %s",
                paste0(class_dir,"tmp_merge.tif")
