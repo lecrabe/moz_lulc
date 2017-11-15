@@ -33,11 +33,13 @@ esa_dir  <- paste0(datadir,"esa_data/")
 gfc_dir  <- paste0(datadir,"gfc_data/")
 seg_dir  <- paste0(datadir,"segments/")
 res_dir  <- paste0(datadir,"results/")
+adg_dir  <- paste0(datadir,"ad_grid/")
 
 esa <- paste0(esa_dir,"esa_cci_moz.tif")
 gtc <- paste0(gfc_dir,"gfc_moz_treecover2000.tif")
 gly <- paste0(gfc_dir,"gfc_moz_lossyear.tif")
 ggn <- paste0(gfc_dir,"gfc_moz_gain.tif")
+
 
 dir.create(datadir,showWarnings = F)
 dir.create(limit_dir,showWarnings = F)
@@ -47,3 +49,4 @@ dir.create(esa_dir,showWarnings = F)
 dir.create(gfc_dir,showWarnings = F)
 dir.create(seg_dir,showWarnings = F)
 dir.create(res_dir,showWarnings = F)
+dir.create(adg_dir,showWarnings = F)

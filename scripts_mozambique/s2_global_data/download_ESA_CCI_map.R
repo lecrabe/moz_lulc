@@ -16,7 +16,7 @@
 
 ###### INSTRUCTIONS
 ###### Get an authorized download link here: http://2016africalandcover20m.esrin.esa.int/download.php
-authorized_url <- "http://2016africalandcover20m.esrin.esa.int/download.php?token=29abc6b51a196a1b5ff5c631f2011216&email=remi.dannunzio@fao.org"
+authorized_url <- "http://2016africalandcover20m.esrin.esa.int/download.php?token=92721763b336e20d67e8c73ad2f3099b&email=mrv.fnds.moz@gmail.com"
 
 ## Folder where your ESA data archives get stored
 esa_folder    <-  "~/downloads/ESA_2016/"
