@@ -12,42 +12,34 @@ time_start <- Sys.time()
 ####################################################################################
 
 #################### VERIFY SATELLITE IMAGE CHARACTERISTICS
+
 mosaic   <- brick(mosaic_name)
-mos_name <- mosaic_name
 res(mosaic)
 proj4string(mosaic)
 extent(mosaic)
 nbands(mosaic)
 
-
-################################################################################
-## Perform unsupervised classification
-################################################################################
-spacing_km  <- res(mosaic)[1]*200
-nb_clusters <- 50
-
-## Generate a systematic grid point
-system(sprintf("oft-gengrid.bash %s %s %s %s",
+#################### PERFORM SEGMENTATION USING THE OTB-SEG ALGORITHM
+system(sprintf("otbcli_MeanShiftSmoothing in %s -fout %s -foutpos %s -spatialr 16 -ranger 16 -thres 0.1 -maxiter 100",
                mosaic_name,
-               spacing_km,
-               spacing_km,
-               paste0(seg_dir,"tmp_grid.tif")
+               paste0(seg_dir,"smooth.tif"),
+               paste0(seg_dir,"position.tif")
                ))
 
-## Extract spectral signature
-system(sprintf("(echo 2 ; echo 3) | oft-extr -o %s %s %s",
-               paste0(seg_dir,"tmp_grid.txt"),
-               paste0(seg_dir,"tmp_grid.tif"),
-               mos_name
+system(sprintf("otbcli_LSMSSegmentation -in %s -inpos %s -out %s -spatialr 5 -ranger 15 -minsize 0 -tilesizex 256 -tilesizey 256",
+               paste0(seg_dir,"smooth.tif"),
+               paste0(seg_dir,"position.tif"),
+               paste0(seg_dir,"tmp_seg_lsms.tif")
                ))
 
-#################### Run k-means unsupervised classification
-system(sprintf("(echo %s; echo %s) | oft-kmeans -o %s -i %s",
-               paste0(seg_dir,"tmp_grid.txt"),
-               nb_clusters,
-               paste0(seg_dir,"tmp_segs_km.tif"),
-               mos_name
-))
+
+system(sprintf("otbcli_LSMSSmallRegionsMerging -in %s -inseg %s -out %s -minsize 20 -tilesizex 256 -tilesizey 256",
+               paste0(seg_dir,"smooth.tif"),
+               paste0(seg_dir,"tmp_seg_lsms.tif"),
+               paste0(seg_dir,"merged_tmp_seg_lsms.tif")
+               ))
+
+
 
 #################### SIEVE RESULTS x2
 system(sprintf("gdal_sieve.py -st %s %s %s",
