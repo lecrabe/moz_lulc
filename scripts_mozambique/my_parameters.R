@@ -6,7 +6,7 @@
 
 ### LOCATION AND NAME OF SUPERVISED CLASSIFICATION
 downclassdir <- paste0(rootdir,"downloads/classif_zambezia_lsat_train_520_poly_wetperiod/")
-classif_name <- "classification_20171101.tif"
+classif_name <- "classif_nampula_20171115.tif"
 
 
 ### LOCATION AND NAME OF SATELLITE MOSAIC FOR SEGMENTATION
