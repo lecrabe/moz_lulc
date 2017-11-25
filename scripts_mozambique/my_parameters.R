@@ -34,3 +34,12 @@ my_colors  <- col2rgb(c("brown","yellow","yellow", # agriculture
                         "grey1","grey2","grey3" # other
 ))
 #colors()
+#################### CREATE COLOR TABLE
+pct <- data.frame(cbind(my_classes,
+                        my_colors[1,],
+                        my_colors[2,],
+                        my_colors[3,],
+                        rgb(my_colors[1,],my_colors[2,],my_colors[3,],maxColorValue = 255)
+))
+
+write.table(pct,paste0(seg_dir,"/color_table.txt"),row.names = F,col.names = F,quote = F)
