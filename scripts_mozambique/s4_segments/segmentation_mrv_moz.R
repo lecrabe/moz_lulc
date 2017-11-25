@@ -20,8 +20,15 @@ extent(mosaic)
 nbands(mosaic)
 
 #################### PERFORM SEGMENTATION USING THE OTB-SEG ALGORITHM
-system(sprintf("otbcli_MeanShiftSmoothing -in %s -fout %s -foutpos %s -spatialr 16 -ranger 16 -thres 0.1 -maxiter 100",
+system(sprintf("gdal_translate -srcwin 0 3000 5000 5000 -co COMPRESS=LZW %s %s",
                mosaic_name,
+               paste0(seg_dir,"tile_5000.tif")
+))
+
+#################### PERFORM SEGMENTATION USING THE OTB-SEG ALGORITHM
+system(sprintf("otbcli_MeanShiftSmoothing -in %s -fout %s -foutpos %s -spatialr 16 -ranger 16 -thres 0.1 -maxiter 100",
+               #mosaic_name,
+               paste0(seg_dir,"tile_5000.tif"),
                paste0(seg_dir,"smooth.tif"),
                paste0(seg_dir,"position.tif")
                ))
