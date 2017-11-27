@@ -161,10 +161,84 @@ df_spc <- df_spc[,colSums(df_spc)!=0]
 
 df <- df_spc[,c("clump_id","total","nospc")]
 
-df$out <- 0 
-df[rowSums(df_spc[,names(df_spc) %in% paste0("spc_",21:26)]) > 0.3 * df$total,]$out <- 1
-df[rowSums(df_spc[,names(df_spc) %in% paste0("spc_",41:44)]) > 0.1 * df$total,]$out <- 2
+####### BY DEFAULT ALL POLYGONS ARE SET TO ZERO
+df$out <- 0
 
+####### WATER BRANCH
+df[df_spc[,paste0("spc_",44)] > dt_threshold* df$total
+   & 
+     df_esa$esa_10 > dt_threshold* df$total ,]$out <- 44
+
+
+####### AGRICULTURE BRANCHES
+df[df_spc[,paste0("spc_",11)] > dt_threshold* df$total
+   & 
+     df_esa$esa_4 > dt_threshold* df$total ,]$out <- 11
+
+df[df_spc[,paste0("spc_",12)] > dt_threshold* df$total
+   & 
+     df_esa$esa_4 > dt_threshold* df$total ,]$out <- 12
+
+####### FOREST BRANCHES
+df[df_spc[,paste0("spc_",21)] > dt_threshold* df$total
+   & 
+     df_esa$esa_1 > dt_threshold* df$total ,]$out <- 21
+
+df[df_spc[,paste0("spc_",23)] > dt_threshold* df$total
+   & 
+     df_esa$esa_1 > dt_threshold* df$total ,]$out <- 23
+
+df[df_spc[,paste0("spc_",24)] > dt_threshold* df$total
+   & 
+     df_esa$esa_1 > dt_threshold* df$total ,]$out <- 24
+
+df[df_spc[,paste0("spc_",25)] > dt_threshold* df$total
+   & 
+     df_esa$esa_1 > dt_threshold* df$total ,]$out <- 25
+
+df[df_spc[,paste0("spc_",26)] > dt_threshold* df$total
+   & 
+     df_esa$esa_1 > dt_threshold* df$total ,]$out <- 26
+
+####### GRASSLAND BRANCHES
+df[df_spc[,paste0("spc_",31)] > dt_threshold* df$total
+   & 
+     df_esa$esa_3 > dt_threshold* df$total ,]$out <- 31
+
+df[df_spc[,paste0("spc_",33)] > dt_threshold* df$total
+   & 
+     df_esa$esa_2 > dt_threshold* df$total ,]$out <- 33
+
+####### WETLAND BRANCHES
+df[df_spc[,paste0("spc_",41)] > dt_threshold* df$total
+   & 
+     df_esa$esa_5 > dt_threshold* df$total ,]$out <- 41
+
+df[df_spc[,paste0("spc_",42)] > dt_threshold* df$total
+   & 
+     df_esa$esa_5 > dt_threshold* df$total ,]$out <- 42
+
+####### URBAN BRANCHES
+df[df_spc[,paste0("spc_",51)] > dt_threshold* df$total
+   & 
+     df_esa$esa_8 > dt_threshold* df$total ,]$out <- 51
+
+####### OTHER BRANCHES
+df[df_spc[,paste0("spc_",61)] > dt_threshold* df$total
+   & 
+     (df_esa$esa_6 + df_esa$esa_7) > dt_threshold* df$total ,]$out <- 61
+
+df[df_spc[,paste0("spc_",62)] > dt_threshold* df$total
+   & 
+     (df_esa$esa_6 + df_esa$esa_7) > dt_threshold* df$total ,]$out <- 62
+
+df[df_spc[,paste0("spc_",63)] > dt_threshold* df$total
+   & 
+     (df_esa$esa_6 + df_esa$esa_7) > dt_threshold* df$total ,]$out <- 63
+
+table(df$out)
+df$maj <- whiches.max(df-spc[])
+table(df_spc[df$out == 0,]$)
 write.table(df[,c("clump_id","total","out")],
             paste0(seg_dir,"reclass.txt"),row.names = F,col.names = F)
 
@@ -174,8 +248,8 @@ write.table(df[,c("clump_id","total","out")],
 system(sprintf("(echo %s; echo 1; echo 1; echo 3; echo 0) | oft-reclass  -oi %s  -um %s %s",
                paste0(seg_dir,"reclass.txt"),
                paste0(seg_dir,"tmp_reclass.tif"),
-               the_segments,
-               the_segments
+               paste0(seg_dir,"segs_mmu_id.tif"),
+               paste0(seg_dir,"segs_mmu_id.tif")
 ))
 
 
