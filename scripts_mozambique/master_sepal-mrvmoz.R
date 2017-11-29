@@ -14,7 +14,7 @@ scriptdir   <- "~/moz_lulc/scripts_mozambique/"
 #############################################################
 ### SETUP PARAMETERS
 #############################################################
-source(paste0(scriptdir,"s0_load_packages_set_folders.R"),echo=TRUE)
+source(paste0(scriptdir,"s0_load_packages_set_folders_mrvmoz.R"),echo=TRUE)
 source(paste0(scriptdir,"my_parameters_mrvmoz.R"),echo=TRUE)
 
 

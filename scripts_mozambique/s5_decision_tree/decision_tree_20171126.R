@@ -7,17 +7,52 @@
 ####################################################################################################
 time_start <- Sys.time() 
 
-#################### CALL SUPERVISED CLASSIFICATION
-spc <- paste0(class_dir,classif_name)
+#################### CALL SUPERVISED CLASSIFICATIONS
+spc_wd <- paste0(class_dir,"classif_wet_dry_ratio_430_poly_20171124.tif")
+spc_d  <- paste0(class_dir,"classif_dry_ratio_430_poly_20171125.tif")
+spc_k  <- paste0(class_dir,"classif_catarina_430_poly_20171125.tif")
 
-#################### ALIGN SUPERVISED CLASSIFICATION MAP WITH SEGMENTS
+
+#################### ALIGN SUPERVISED CLASSIFICATION MAP WITH SEGMENTS : Catarina
 mask   <- the_segments
-input  <- spc
-ouput  <- paste0(seg_dir,"tmp_spc_clip.tif")
+input  <- spc_k
+ouput  <- paste0(seg_dir,"tmp_spc_k_clip.tif")
 
 proj   <- proj4string(raster(mask))
 extent <- extent(raster(mask))
 res    <- res(raster(mask))[1]
+
+system(sprintf("gdalwarp -co COMPRESS=LZW -t_srs \"%s\" -te %s %s %s %s -tr %s %s %s %s -overwrite",
+               proj4string(raster(mask)),
+               extent(raster(mask))@xmin,
+               extent(raster(mask))@ymin,
+               extent(raster(mask))@xmax,
+               extent(raster(mask))@ymax,
+               res(raster(mask))[1],
+               res(raster(mask))[2],
+               input,
+               ouput
+))
+
+#################### ALIGN SUPERVISED CLASSIFICATION MAP WITH SEGMENTS : WET DRY
+input  <- spc_wd
+ouput  <- paste0(seg_dir,"tmp_spc_wd_clip.tif")
+
+system(sprintf("gdalwarp -co COMPRESS=LZW -t_srs \"%s\" -te %s %s %s %s -tr %s %s %s %s -overwrite",
+               proj4string(raster(mask)),
+               extent(raster(mask))@xmin,
+               extent(raster(mask))@ymin,
+               extent(raster(mask))@xmax,
+               extent(raster(mask))@ymax,
+               res(raster(mask))[1],
+               res(raster(mask))[2],
+               input,
+               ouput
+))
+
+#################### ALIGN SUPERVISED CLASSIFICATION MAP WITH SEGMENTS : DRY
+input  <- spc_d
+ouput  <- paste0(seg_dir,"tmp_spc_d_clip.tif")
 
 system(sprintf("gdalwarp -co COMPRESS=LZW -t_srs \"%s\" -te %s %s %s %s -tr %s %s %s %s -overwrite",
                proj4string(raster(mask)),
@@ -38,7 +73,7 @@ system(sprintf("gdalwarp -co COMPRESS=LZW -t_srs \"%s\" -te %s %s %s %s -tr %s %
 #################### TAKE MAJORITY CLASS PER POLYGON
 system(sprintf("bash oft-segmode.bash %s %s %s",
                the_segments,
-               paste0(seg_dir,"tmp_spc_clip.tif"),
+               paste0(seg_dir,"tmp_spc_k_clip.tif"),
                paste0(seg_dir,"tmp_spc_segmode.tif")
 ))
 
@@ -62,7 +97,7 @@ system(sprintf("(echo %s) | oft-addpct.py %s %s",
 #################### COMPRESS
 system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
                paste0(seg_dir,"tmp_pct_spc_segmode.tif"),
-               paste0(res_dir,"spc_segmode.tif")
+               paste0(res_dir,province,"_spc_segmode.tif")
 ))
 
 
@@ -70,13 +105,28 @@ system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
 #################### OPTION 2: DECISION TREE 
 ####################################################################################################
 
-#################### ZONAL FOR SPC MAP
+#################### ZONAL FOR SPC MAPS: K, WD and D
 system(sprintf("oft-his -i %s -o %s -um %s -maxval %s",
-               paste0(seg_dir,"tmp_spc_clip.tif"),
-               paste0(seg_dir,"tmp_zonal_spc.txt"),
+               paste0(seg_dir,"tmp_spc_k_clip.tif"),
+               paste0(seg_dir,"tmp_zonal_spc_k.txt"),
                the_segments,
                max(my_classes)
 ))
+
+system(sprintf("oft-his -i %s -o %s -um %s -maxval %s",
+               paste0(seg_dir,"tmp_spc_d_clip.tif"),
+               paste0(seg_dir,"tmp_zonal_spc_d.txt"),
+               the_segments,
+               max(my_classes)
+))
+
+system(sprintf("oft-his -i %s -o %s -um %s -maxval %s",
+               paste0(seg_dir,"tmp_spc_wd_clip.tif"),
+               paste0(seg_dir,"tmp_zonal_spc_wd.txt"),
+               the_segments,
+               max(my_classes)
+))
+
 
 #################### ALIGN ESA MAP WITH SEGMENTS
 mask   <- the_segments
@@ -106,14 +156,14 @@ system(sprintf("oft-his -i %s -o %s -um %s -maxval 10",
                the_segments
 ))
 
-#################### CREATE GFC 2016 TREE COVER MAP
-system(sprintf("gdal_calc.py -A %s -B %s -C %s --co COMPRESS=LZW --outfile=%s --calc=\"%s\"",
-               gtc,
-               gly,
-               ggn,
-               paste0(gfc_dir,"gfc_tc2016_th",gfc_threshold,".tif"),
-               paste0("(A>",gfc_threshold,")*((B==0)+(C==1))*A")
-))
+# #################### CREATE GFC 2016 TREE COVER MAP
+# system(sprintf("gdal_calc.py -A %s -B %s -C %s --co COMPRESS=LZW --outfile=%s --calc=\"%s\"",
+#                gtc,
+#                gly,
+#                ggn,
+#                paste0(gfc_dir,"gfc_tc2016_th",gfc_threshold,".tif"),
+#                paste0("(A>",gfc_threshold,")*((B==0)+(C==1))*A")
+# ))
 
 
 #################### ALIGN GFC MAP WITH SEGMENTS
