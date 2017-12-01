@@ -10,10 +10,10 @@ time_start <- Sys.time()
 ####################################################################################
 ####### Segment satellite mosaic
 ####################################################################################
-tmp          <- substr(list.files(mosaicdir),24,50)
+tmp          <- substr(list.files(mosaicdir,".tif"),24,50)
 provinces    <- substr(tmp,1,nchar(tmp)-4)
-for(province in provinces){
-  
+for(province in provinces[c(7,8,9,10,12,13,14,15)]){
+  print(province)
   mosaic_name  <- paste0(mosaicdir,mosaic_base,"_",province,".tif")
   
   #################### VERIFY SATELLITE IMAGE CHARACTERISTICS
@@ -49,7 +49,7 @@ for(province in provinces){
                  params[4]
   ))
   
-  system(sprintf("otbcli_LSMSSegmentation -in %s -inpos %s -out %s -spatialr %s -ranger %s -minsize 0 -tmpdir %s -tilesizex 4096 -tilesizey 4096",
+  system(sprintf("otbcli_LSMSSegmentation -in %s -inpos %s -out %s -spatialr %s -ranger %s -minsize 0 -tmpdir %s -tilesizex 512 -tilesizey 512",
                  paste0(seg_dir,"tmp_smooth_",paste0(params,collapse = "_"),".tif"),
                  paste0(seg_dir,"tmp_position_",paste0(params,collapse = "_"),".tif"),
                  paste0(seg_dir,"tmp_seg_lsms_",paste0(params,collapse = "_"),".tif"),
@@ -59,16 +59,18 @@ for(province in provinces){
   ))
   
   
-  system(sprintf("otbcli_LSMSSmallRegionsMerging -in %s -inseg %s -out %s -minsize %s -tilesizex 4096 -tilesizey 4096",
+  system(sprintf("otbcli_LSMSSmallRegionsMerging -in %s -inseg %s -out %s -minsize %s -tilesizex 512 -tilesizey 512",
                  paste0(seg_dir,"tmp_smooth_",paste0(params,collapse = "_"),".tif"),
                  paste0(seg_dir,"tmp_seg_lsms_",paste0(params,collapse = "_"),".tif"),
                  paste0(seg_dir,"seg_lsms_",province,"_",paste0(params,collapse = "_"),".tif"),
                  params[5]
   ))
   
-  system(sprintf("rm %s",
-                 paste0(seg_dir,"tmp*")))
-  
+  # system(sprintf("rm %s",
+  #                paste0(seg_dir,"tmp*")))
 
-  time_segments <- Sys.time() - time_start
+
+  
 }
+
+time_segments <- Sys.time() - time_start

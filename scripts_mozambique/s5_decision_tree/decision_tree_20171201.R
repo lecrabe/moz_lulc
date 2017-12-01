@@ -13,7 +13,7 @@ spc_k  <- paste0(class_dir,"classif_catarina_ratio848_poly_20171127.tif")
 
 tmp          <- substr(list.files(mosaicdir,".tif"),24,50)
 provinces    <- substr(tmp,1,nchar(tmp)-4)
-for(province in provinces[c(1,4,6:15)]){
+for(province in provinces[c(10:15)]){
   
 #province <- "Inhambane"
 the_segments <- paste0(seg_dir,"seg_lsms_",province,"_",paste0(params,collapse = "_"),".tif")
@@ -202,141 +202,229 @@ table(df$mode_esa,df$mode_spk)
 ####### BY DEFAULT ALL POLYGONS ARE SET TO ZERO
 df$out <- 0
 
-df[df$mode_spk %in% c(0) ,]$out <- df[df$mode_spk %in% c(0) ,]$mode_spw
+tryCatch({
+  df[df$mode_spk %in% c(0) ,]$out <- df[df$mode_spk %in% c(0) ,]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
   
 ####################################################################################################
 ####### AGRICULTURE BRANCH
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(11:13,31:33),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(11:13,31:33),]$out      <- 
 df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(11:13,31:33),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(0,1,2),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(0,1,2),]$out      <- 
 df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(0,1,2),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(3:7),]$out      <- 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(3:7),]$mode_spk
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(3:7),]$out      <- 
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(3:7),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c( 8),]$out       <- 51
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c( 8),]$out       <- 51
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(10),]$out       <- 44
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(10),]$out       <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(10),]$out       <- 44
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(10),]$out       <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(0:9),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(0:9),]$out      <- 
 df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(0:9),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(7,8),]$out      <-
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(7,8),]$out      <-
 df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(7,8),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(0:6,10),]$out   <-
+tryCatch({
+  df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(0:6,10),]$out   <-
 df[df$mode_spk %in% c(11,12,13) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(0:6,10),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
 
 ####################################################################################################
 ####### FOREST BRANCH
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(21:26),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(21:26),]$out      <- 
 df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(21:26),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2),]$out  <-
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2),]$out  <-
 df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(3:7),]$out  <-
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(3:7),]$out  <-
 df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(3:7),]$mode_spw
+},error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(8),  ]$out  <- 51
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(8),  ]$out  <- 51
+  },error=function(e){cat("Not relevant\n")})
   
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(10), ]$out  <- 44
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(10), ]$out  <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(41:44)       & df$mode_esa %in% c(10), ]$out  <- 
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(41:44)       & df$mode_esa %in% c(10), ]$out  <- 
 df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(41:44)       & df$mode_esa %in% c(10), ]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(41:44)       & df$mode_esa %in% c(0:9),]$out  <- 
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(41:44)       & df$mode_esa %in% c(0:9),]$out  <- 
 df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(41:44)       & df$mode_esa %in% c(0:9),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(51:63)       & df$mode_esa %in% c(7:8),]$out  <- 
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(51:63)       & df$mode_esa %in% c(7:8),]$out  <- 
 df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(51:63)       & df$mode_esa %in% c(7:8),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(51:63)       & df$mode_esa %in% c(0:6,10),]$out <- 
+tryCatch({
+  df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(51:63)       & df$mode_esa %in% c(0:6,10),]$out <- 
 df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(51:63)       & df$mode_esa %in% c(0:6,10),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
 
 ####################################################################################################
 ####### GRASSLAND BRANCH
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(11:13,31:33),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(11:13,31:33),]$out      <- 
 df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(11:13,31:33),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(1,2),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(1,2),]$out      <- 
 df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(1,2),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(0,3:7),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(0,3:7),]$out      <- 
 df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(0,3:7),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c( 8),]$out       <- 51
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c( 8),]$out       <- 51
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(10),]$out       <- 44
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(21:26) & df$mode_esa %in% c(10),]$out       <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(10),]$out       <- 44
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(10),]$out       <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(0:9),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(0:9),]$out      <- 
 df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(41:44) & df$mode_esa %in% c(0:9),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(7,8),]$out      <-
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(7,8),]$out      <-
 df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(7,8),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(0:6,10),]$out   <-
+tryCatch({
+  df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(0:6,10),]$out   <-
 df[df$mode_spk %in% c(31:33) & df$mode_spw %in% c(51:63) & df$mode_esa %in% c(0:6,10),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
 
 ####################################################################################################
 ####### WETLAND BRANCH
-df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(41:42),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(41:42),]$out      <- 
 df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(41:42),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(0:7),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(0:7),]$out      <- 
 df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(0:7),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(10),]$out     <- 44
+tryCatch({
+  df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(10),]$out     <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(8 ),]$out     <- 51
+tryCatch({
+  df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(8 ),]$out     <- 5
+  1},error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(5,10),]$out       <- 
+tryCatch({
+  df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(5,10),]$out       <- 
 df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(5,10),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(0:4,6:8),]$out    <- 
+tryCatch({
+  df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(0:4,6:8),]$out    <- 
 df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(0:4,6:8),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
 
 ####################################################################################################
 ####### WATER BRANCH
-df[df$mode_spk %in% c(43:44) & df$mode_spw %in% c(41:44),]$out      <- 44
+tryCatch({
+  df[df$mode_spk %in% c(43:44) & df$mode_spw %in% c(41:44),]$out      <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(43:44) & df$mode_spw %in% c(1:33,51:63) & df$mode_esa %in% c(10),]$out       <- 44
+tryCatch({
+  df[df$mode_spk %in% c(43:44) & df$mode_spw %in% c(1:33,51:63) & df$mode_esa %in% c(10),]$out       <- 44
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(43:44) & df$mode_spw %in% c(1:33,51:63) & df$mode_esa %in% c(1:9),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(43:44) & df$mode_spw %in% c(1:33,51:63) & df$mode_esa %in% c(1:9),]$out      <- 
 df[df$mode_spk %in% c(43:44) & df$mode_spw %in% c(1:33,51:63) & df$mode_esa %in% c(1:9),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
 
 ####################################################################################################
 ####### URBAN BRANCH
-df[df$mode_spk %in% c(51) & df$mode_spw %in% c(51) & df$mode_esa %in% c(8),]$out <- 51
+tryCatch({
+  df[df$mode_spk %in% c(51) & df$mode_spw %in% c(51) & df$mode_esa %in% c(8),]$out <- 51
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(51) & df$mode_spw %in% c(51) & df$mode_esa != 8     ,]$out <- 61
+tryCatch({
+  df[df$mode_spk %in% c(51) & df$mode_spw %in% c(51) & df$mode_esa != 8     ,]$out <- 61
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(51) & df$mode_spw != 51 & df$mode_esa %in% c(8),]$out      <- 51
+tryCatch({
+  df[df$mode_spk %in% c(51) & df$mode_spw != 51 & df$mode_esa %in% c(8),]$out      <- 51
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(51) & df$mode_spw != 51 & df$mode_esa != 8,]$out           <- 
+tryCatch({
+  df[df$mode_spk %in% c(51) & df$mode_spw != 51 & df$mode_esa != 8,]$out           <- 
 df[df$mode_spk %in% c(51) & df$mode_spw != 51 & df$mode_esa != 8,]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
 
 ####################################################################################################
 ####### OTHER LAND BRANCH
-df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(61:63),]$out                                <- 
+tryCatch({
+  df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(61:63),]$out                                <- 
 df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(61:63),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(11:51) & df$mode_esa %in% c(6,7),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(11:51) & df$mode_esa %in% c(6,7),]$out      <- 
 df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(11:51) & df$mode_esa %in% c(6,7),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
 
-df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(11:51) & df$mode_esa %in% c(0:5,8:10),]$out      <- 
+tryCatch({
+  df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(11:51) & df$mode_esa %in% c(0:5,8:10),]$out      <- 
 df[df$mode_spk %in% c(61:63) & df$mode_spw %in% c(11:51) & df$mode_esa %in% c(0:5,8:10),]$mode_spw
+  },error=function(e){cat("Not relevant\n")})
 
 
 table(df$out)
