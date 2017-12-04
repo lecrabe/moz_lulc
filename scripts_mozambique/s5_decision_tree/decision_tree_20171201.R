@@ -13,7 +13,7 @@ spc_k  <- paste0(class_dir,"classif_catarina_ratio848_poly_20171127.tif")
 
 tmp          <- substr(list.files(mosaicdir,".tif"),24,50)
 provinces    <- substr(tmp,1,nchar(tmp)-4)
-for(province in provinces[c(10:15)]){
+for(province in provinces){
   
 #province <- "Inhambane"
 the_segments <- paste0(seg_dir,"seg_lsms_",province,"_",paste0(params,collapse = "_"),".tif")
@@ -61,11 +61,11 @@ system(sprintf("gdalwarp -co COMPRESS=LZW -t_srs \"%s\" -te %s %s %s %s -tr %s %
 ####################################################################################################
 
 # #################### TAKE MAJORITY CLASS PER POLYGON
-# system(sprintf("bash oft-segmode.bash %s %s %s",
-#                the_segments,
-#                paste0(seg_dir,"tmp_spc_k_clip.tif"),
-#                paste0(seg_dir,"tmp_spc_segmode.tif")
-# ))
+system(sprintf("bash oft-segmode.bash %s %s %s",
+               the_segments,
+               paste0(seg_dir,"tmp_spc_k_clip.tif"),
+               paste0(seg_dir,"tmp_spc_segmode.tif")
+))
 
 
 #################### CREATE COLOR TABLE
