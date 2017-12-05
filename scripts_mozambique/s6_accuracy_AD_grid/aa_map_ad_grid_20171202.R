@@ -18,13 +18,13 @@ system(sprintf("gdalbuildvrt %s %s",
 ### COMPRESS
 system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
                paste0(res_dir,"tmp_merge.vrt"),
-               paste0(res_dir,"dt_merge_20171202.tif")
+               paste0(res_dir,"dt_merge_20171204.tif")
 ))
 
 
 
 
-the_result <- paste0(res_dir,"dt_merge_20171202.tif")
+the_result <- paste0(res_dir,"dt_merge_20171204.tif")
 
 #### READ THE AD GRID AND THE CODE LIST
 ad    <- read.csv(paste0(adg_dir,"ad_grid.csv"))
@@ -100,7 +100,7 @@ table(df1$map_code_l2,df1$map_code_l1)
 df2 <- df1[df1$map_code_l2 != 0 ,]
 df2 <- df2[!is.na(df2$map_code_l2) ,]
 
-write.csv(df2,paste0(res_dir,"map_vs_ref_20171202.csv"),row.names = F)
+write.csv(df2,paste0(res_dir,"map_vs_ref_20171204.csv"),row.names = F)
 
 ######## Confusion matrix as count of elements
 map_code <- "map_code_l1"
@@ -139,4 +139,4 @@ areas_l1 <- data.frame(tapply(areas$map_area,areas$map_code_l1,sum))
 names(areas_l1) <- "map_area"
 areas_l1$map_code_l1 <- rownames(areas_l1)
 
-write.csv(areas_l1,paste0(res_dir,"areas_l1_20171202.csv"),row.names = F)
+write.csv(areas_l1,paste0(res_dir,"areas_l1_20171204.csv"),row.names = F)
