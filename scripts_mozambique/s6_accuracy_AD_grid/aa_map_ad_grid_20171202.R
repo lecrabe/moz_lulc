@@ -140,3 +140,4 @@ names(areas_l1) <- "map_area"
 areas_l1$map_code_l1 <- rownames(areas_l1)
 
 write.csv(areas_l1,paste0(res_dir,"areas_l1_20171204.csv"),row.names = F)
+write.csv(areas,paste0(res_dir,"areas_l2_20171206.csv"),row.names = F)

@@ -9,7 +9,8 @@ time_start <- Sys.time()
 
 #################### CALL SUPERVISED CLASSIFICATIONS
 spc_wd <- paste0(class_dir,"classif_wet_dry_ratio848_poly_20171127.tif")
-spc_k  <- paste0(class_dir,"classif_catarina_ratio848_poly_20171127.tif")
+#spc_k  <- paste0(class_dir,"classif_catarina_ratio848_poly_20171127.tif")
+spc_k  <- paste0(class_dir,"classif_pbs_ratio_848_poly_20171205.tif")
 
 tmp          <- substr(list.files(mosaicdir,".tif"),24,50)
 provinces    <- substr(tmp,1,nchar(tmp)-4)
@@ -464,7 +465,7 @@ system(sprintf("(echo %s) | oft-addpct.py %s %s",
 #################### COMPRESS
 system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
                paste0(seg_dir,"tmp_pct_decision_tree.tif"),
-               paste0(res_dir,province,"_decision_tree_20171130.tif")
+               paste0(res_dir,province,"_decision_tree_20171206.tif")
 ))
 
 system(sprintf("rm %s",
