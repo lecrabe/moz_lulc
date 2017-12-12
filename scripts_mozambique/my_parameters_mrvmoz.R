@@ -10,7 +10,8 @@
 #classif_base <- "classif_catarina_ratio430_poly_20171127"
 #classif_base <- "classif_catarina_ratio848_poly_20171127"
 #classif_base <- "classif_wet_dry_ratio848_poly_20171127"
-classif_base <- "classif_pbs_ratio_848_poly_20171205"
+#classif_base <- "classif_pbs_ratio_848_poly_20171205"
+classif_base <- "classif_iitc_ratio_ecozone"
 
 downclassdir <- paste0(rootdir,"downloads/",classif_base,"/")
 dir.create(downclassdir,showWarnings = F)
