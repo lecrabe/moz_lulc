@@ -6,7 +6,7 @@
 
 ######## SET YOUR WORKING DIRECTORY
 rootdir <- "/media/dannunzio/OSDisk/Users/dannunzio/Documents/countries/mozambique/training_data/"
-date    <- 20171207
+date    <- 20171208
 setwd(rootdir)
 ######## LOAD PACKAGES & OPTIONS
 library(raster)
@@ -64,7 +64,7 @@ table(out$lev2_code,out$code_l2)
 
 ########### REPROJECT BEFORE EXPORTING TO KML
 out <- spTransform(out,CRS("+init=epsg:4326"))
-#writeOGR(out,paste0("train_poly_",nbtotal,"_",date,".shp"),paste0("train_poly_",nbtotal,"_",date),"ESRI Shapefile")
+writeOGR(out,paste0("train_poly_",nbtotal,"_",date,".shp"),paste0("train_poly_",nbtotal,"_",date),"ESRI Shapefile")
 writeOGR(out[,"code_l2"],paste0("train_poly_",nbtotal,"_",date,".kml"),paste0("train_poly_",nbtotal,"_",date),"KML")
 check_classes(out@data)
 
