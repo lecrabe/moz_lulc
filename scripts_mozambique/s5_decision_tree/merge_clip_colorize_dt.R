@@ -10,7 +10,7 @@
 ### MERGE AS VRT
 system(sprintf("gdalbuildvrt %s %s",
                paste0(res_dir,"tmp_merge.vrt"),
-               paste0(res_dir,"*_decision_tree_20171130.tif")
+               paste0(res_dir,"*_decision_tree_20180405.tif")
 ))
 
 system(sprintf("gdalwarp -t_srs %s -co COMPRESS=LZW %s %s",
