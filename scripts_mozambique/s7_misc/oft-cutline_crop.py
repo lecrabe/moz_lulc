@@ -74,7 +74,7 @@ while i < len(argv):
         i = i + 1
         attr = argv[i];
     
-    if arg == '-o':
+    elif arg == '-o':
         i = i + 1
         outfile = argv[i];
         
