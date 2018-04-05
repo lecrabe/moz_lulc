@@ -50,9 +50,9 @@ if argv is None:
 ###############################################################
 ##################### Test if all necessary arguments are in
 ###############################################################
-if len(argv) != 7:
+if len(argv) != 9:
     print "\nVersion %s Last update on %s\nCrop a raster to the extent of a shapefile with alignment of original pixels\n" % (version,update)
-    print "Usage: oft-cutline <-v vector_input> <-i raster_input> <-o raster_output> \n"
+    print "Usage: oft-cutline <-v vector_input> <-i mask_raster_input> <-o rasterized_output> [-a attribute]\n"
     sys.exit( 0 )
 
 
@@ -69,6 +69,10 @@ homedir = os.getcwd()
 i=1
 while i < len(argv):
     arg = argv[i]
+
+    if arg == '-a':
+        i = i + 1
+        attr = argv[i];
     
     if arg == '-o':
         i = i + 1
@@ -154,7 +158,7 @@ ymax = ymin+size_y*pxsz;
 ################################################################
 
 ################ Rasterize the vector with at least one pixel encompassing the border
-rasterize = "gdal_rasterize -clump -l %s -te %r %r %r %r -tr %r %r -co \"COMPRESS=LZW\" %s %s/tmp_mask.tif\n" % (layer,im_xmin,im_ymin,im_xmax,im_ymax,pxsz,pxsz,vector,tmpdir)
+rasterize = "gdal_rasterize -a %s -l %s -te %r %r %r %r -tr %r %r -co \"COMPRESS=LZW\" %s %s/tmp_mask.tif\n" % (attr,layer,im_xmin,im_ymin,im_xmax,im_ymax,pxsz,pxsz,vector,tmpdir)
 print "-"*40 + "\n" + rasterize
 os.system(rasterize)
 
