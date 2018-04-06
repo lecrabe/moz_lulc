@@ -29,24 +29,24 @@ source(paste0(scriptdir,"my_parameters_mrvmoz.R"),echo=TRUE)
 #############################################################
 ### GET CLASSIFICATION PERFORMED IN SEPAL AND MERGE TILES
 #############################################################
-source(paste0(scriptdir,"s3_classification/merge_classification.R"),echo=TRUE)
+#source(paste0(scriptdir,"s3_classification/merge_classification.R"),echo=TRUE)
 
 
 #############################################################
 ### CREATE SEGMENTS OVER THE AOI AND INTEGRATE VALUES
 #############################################################
-#source(paste0(scriptdir,"s4_segments/merge_mosaic.R"),echo=TRUE)
-source(paste0(scriptdir,"s4_segments/segmentation.R"),echo=TRUE)
+#source(paste0(scriptdir,"s4_segments/retrieve_mosaic.R"),echo=TRUE)
+#source(paste0(scriptdir,"s4_segments/segmentation_otb_lsms.R"),echo=TRUE)
 
 
 #############################################################
 ### COMBINE PRODUCTS IN A DECISION TREE
 #############################################################
-source(paste0(scriptdir,"s5_decision_tree/decision_tree.R"),echo=TRUE)
-
+#source(paste0(scriptdir,"s5_decision_tree/decision_tree_20180406.R"),echo=TRUE)
+#source(paste0(scriptdir,"s5_decision_tree/merge_clip_colorize_dt_20180406.R"),echo=TRUE)
 
 #############################################################
 ### USE AD GRID (Collect Earth exercise) TO ASSESS ACCURACY
 #############################################################
-#source(paste0(scriptdir,"s6_accuracy_assessment/aa_map_with_ad_grid.R"),echo=TRUE)
+#source(paste0(scriptdir,"s6_accuracy_assessment/aa_map_envi_polys_20180406.R"),echo=TRUE)
 
