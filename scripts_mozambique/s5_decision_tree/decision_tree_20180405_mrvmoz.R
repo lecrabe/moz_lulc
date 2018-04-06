@@ -28,7 +28,7 @@ provinces          <- substr(
 )
 
 #################### LOPP THROUGH EACH SUBSET
-for(province in provinces[2]){
+for(province in provinces[8:14]){
 
   the_segments <- paste0(seg_dir,"seg_lsms_",province,"_",paste0(params,collapse = "_"),".tif")
   
@@ -390,17 +390,25 @@ for(province in provinces[2]){
   },error=function(e){cat("Not relevant\n")})
   
   tryCatch({
-    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(8 ),]$out     <- 51
+    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(43:44) & df$mode_esa %in% c(8 ),]$out   <-  51
     1},error=function(e){cat("Not relevant\n")})
-  
+
   tryCatch({
-    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(2:5,10),]$out       <- 
-      df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(2:5,10),]$mode_spk
+    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(51) & df$mode_esa %in% c(8),]$out       <-  51
   },error=function(e){cat("Not relevant\n")})
   
   tryCatch({
-    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(0:1,6:8),]$out    <- 
-      df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,51:63) & df$mode_esa %in% c(0:1,6:8),]$mode_spw
+    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(51) & !(df$mode_esa %in% c(8)),]$out    <-  41
+  },error=function(e){cat("Not relevant\n")})
+  
+  tryCatch({
+    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,61:63) & df$mode_esa %in% c(2:5,10),]$out       <- 
+      df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,61:63) & df$mode_esa %in% c(2:5,10),]$mode_spk
+  },error=function(e){cat("Not relevant\n")})
+  
+  tryCatch({
+    df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,61:63) & df$mode_esa %in% c(0:1,6:8),]$out    <- 
+      df[df$mode_spk %in% c(41:42) & df$mode_spw %in% c(11:33,61:63) & df$mode_esa %in% c(0:1,6:8),]$mode_spw
   },error=function(e){cat("Not relevant\n")})
   
   
