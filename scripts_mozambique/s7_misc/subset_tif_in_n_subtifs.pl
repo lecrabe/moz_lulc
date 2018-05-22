@@ -15,6 +15,7 @@ if(@ARGV[2] eq ''){die("Usage : <input.tif> <nb tiles in x> <nb tiles in y> \n")
 
 
 $base=substr($file,0,length($file)-4);
+$ext =substr($file,length($file)-3,length($file));
 
 $outdir = "$path/$base\_subset_tiles";
 system "mkdir $outdir";
@@ -48,9 +49,9 @@ if($i eq $nx){$x_size=$size_x-$subsize_x*($nx-1)}
 if($j eq $ny){$y_size=$size_y-$subsize_y*($ny-1)}
 
 print "$i $j\n";
-print "gdal_translate -srcwin $x_off $y_off $x_size $y_size $path/$base.tif $outdir/$base\_$i\_$j.tif";
+print "gdal_translate -srcwin $x_off $y_off $x_size $y_size $path/$base.$ext $outdir/$base\_$i\_$j.tif";
 print "\n";
-system "gdal_translate -co \"COMPRESS=LZW\" -srcwin $x_off $y_off $x_size $y_size $path/$base.tif $outdir/$base\_$i\_$j.tif";
+system "gdal_translate -co \"COMPRESS=LZW\" -srcwin $x_off $y_off $x_size $y_size $path/$base.$ext $outdir/$base\_$i\_$j.tif";
 
 }
 }

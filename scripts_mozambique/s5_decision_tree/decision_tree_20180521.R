@@ -20,19 +20,19 @@ pct <- data.frame(cbind(my_classes,
 
 write.table(pct,paste0(seg_dir,"/color_table.txt"),row.names = F,col.names = F,quote = F)
 
-#################### GET LIST OF SUBSETS (PROVINCES) TO PROCESS
-provinces          <- substr(
-  list.files(seg_dir,glob2rx("seg_lsms*.tif")),
-  10,
-  nchar(list.files(seg_dir,glob2rx("seg_lsms*.tif")))-19
+#################### GET LIST OF SUBSETS (TILES) TO PROCESS
+tiles          <- substr(
+  list.files(seg_tile_dir,glob2rx("segment_tile*.tif")),
+  1,
+  nchar(list.files(seg_tile_dir,glob2rx("segment_tile*.tif")))-4
 )
 
-#################### LOPP THROUGH EACH SUBSET --> START WITH ONE PROVINCE ONLY [1], Cabo Delgado
-#################### ONCE YOU HAVE RUN FOR ONE PROVINCE. DOWNLOAD AND VERIFY
-#################### IF ALL GOOD, DELETE [1] below and RUN FOR ALL PROVINCES
-for(province in provinces[c(10:14)]){
+#################### LOPP THROUGH EACH SUBSET --> START WITH ONE tile ONLY [1], Cabo Delgado
+#################### ONCE YOU HAVE RUN FOR ONE tile. DOWNLOAD AND VERIFY
+#################### IF ALL GOOD, DELETE [1] below and RUN FOR ALL tileS
+for(tile in tiles[1]){
 
-  the_segments <- paste0(seg_dir,"seg_lsms_",province,"_",paste0(params,collapse = "_"),".tif")
+  the_segments <- paste0(seg_tile_dir,tile,".tif")
   
   #################### ALIGN SUPERVISED CLASSIFICATION MAP WITH SEGMENTS : IITC classification
   mask   <- the_segments
@@ -97,7 +97,7 @@ for(province in provinces[c(10:14)]){
   # #################### COMPRESS
   # system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
   #                paste0(seg_dir,"tmp_pct_spc_segmode.tif"),
-  #                paste0(res_dir,province,"_spc_segmode.tif")
+  #                paste0(res_dir,tile,"_spc_segmode.tif")
   # ))
   
   
@@ -494,13 +494,13 @@ for(province in provinces[c(10:14)]){
   
   
   write.table(df[,c("clump_id","total_spk","out","mode_spk","mode_spw","mode_esa","sd_gfc")],
-              paste0(seg_dir,province,"_reclass.txt"),row.names = F,col.names = F)
+              paste0(seg_dir,tile,"_reclass.txt"),row.names = F,col.names = F)
   
   
   ################################################################################
   #################### Reclassify 
   system(sprintf("(echo %s; echo 1; echo 1; echo 3; echo 0) | oft-reclass  -oi %s  -um %s %s",
-                 paste0(seg_dir,province,"_reclass.txt"),
+                 paste0(seg_dir,tile,"_reclass.txt"),
                  paste0(seg_dir,"tmp_reclass.tif"),
                  the_segments,
                  the_segments
@@ -525,7 +525,7 @@ for(province in provinces[c(10:14)]){
   #################### COMPRESS
   system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
                  paste0(seg_dir,"tmp_pct_decision_tree.tif"),
-                 paste0(res_dir,province,"_decision_tree_20180521.tif")
+                 paste0(res_dir,tile,"_decision_tree_20180521.tif")
   ))
   
   system(sprintf("rm %s",
@@ -535,7 +535,7 @@ for(province in provinces[c(10:14)]){
                  paste0(seg_dir,"tmp*.txt")))
   
   time_decision_tree <- Sys.time() - time_start
-  assign(paste0("time_",province),time_decision_tree)
+  assign(paste0("time_",tile),time_decision_tree)
   
 }
 
