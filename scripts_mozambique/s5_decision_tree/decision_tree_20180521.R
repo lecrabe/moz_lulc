@@ -27,8 +27,10 @@ provinces          <- substr(
   nchar(list.files(seg_dir,glob2rx("seg_lsms*.tif")))-19
 )
 
-#################### LOPP THROUGH EACH SUBSET
-for(province in provinces[11:15]){
+#################### LOPP THROUGH EACH SUBSET --> START WITH ONE PROVINCE ONLY [1], Cabo Delgado
+#################### ONCE YOU HAVE RUN FOR ONE PROVINCE. DOWNLOAD AND VERIFY
+#################### IF ALL GOOD, DELETE [1] below and RUN FOR ALL PROVINCES
+for(province in provinces[c(10:14)]){
 
   the_segments <- paste0(seg_dir,"seg_lsms_",province,"_",paste0(params,collapse = "_"),".tif")
   
@@ -161,11 +163,11 @@ for(province in provinces[11:15]){
   mask   <- the_segments
   input  <- paste0(gfc_dir,"gfc_tc2016_th",gfc_threshold,".tif")
   ouput  <- paste0(seg_dir,"tmp_gfc_tc_clip.tif")
-
+  
   proj   <- proj4string(raster(mask))
   extent <- extent(raster(mask))
   res    <- res(raster(mask))[1]
-
+  
   system(sprintf("gdalwarp -co COMPRESS=LZW -t_srs \"%s\" -te %s %s %s %s -tr %s %s %s %s -overwrite",
                  proj4string(raster(mask)),
                  extent(raster(mask))@xmin,
@@ -177,14 +179,14 @@ for(province in provinces[11:15]){
                  input,
                  ouput
   ))
-
+  
   #################### ZONAL FOR GFC TREE COVER MAP
   system(sprintf("oft-stat -i %s -o %s -um %s",
                  paste0(seg_dir,"tmp_gfc_tc_clip.tif"),
                  paste0(seg_dir,"tmp_zonal_gfc_tc.txt"),
                  the_segments
   ))
-
+  
   #################### READ THE ZONAL STATS
   df_spc_k  <- read.table(paste0(seg_dir,"tmp_zonal_spc_k.txt"))
   df_spc_w  <- read.table(paste0(seg_dir,"tmp_zonal_spc_wd.txt"))
@@ -204,6 +206,7 @@ for(province in provinces[11:15]){
   df$mode_esa <- c(0:10)[max.col(df_esa[,paste0("esa_",0:10)])]
   df$mode_spk <- c(0:max(my_classes))[max.col(df_spc_k[,paste0("spk_",0:max(my_classes))])]
   df$mode_spw <- c(0:max(my_classes))[max.col(df_spc_w[,paste0("spw_",0:max(my_classes))])]
+  df$sd_gfc   <- df_gfc$sd_gfc
   
   table(df$mode_spk,df$mode_spw)
   table(df$mode_esa,df$mode_spk)
@@ -267,17 +270,8 @@ for(province in provinces[11:15]){
   ####################################################################################################
   ####### FOREST BRANCH
   tryCatch({
-    df[df$mode_spk %in% c(21:24) & df$mode_spw %in% c(21:24) & df_gfc$av_gfc > 30 ,]$out      <- 
-      df[df$mode_spk %in% c(21:24) & df$mode_spw %in% c(21:24) & df_gfc$av_gfc > 30,]$mode_spk
-  },error=function(e){cat("Not relevant\n")})
-  
-  tryCatch({
-    df[df$mode_spk %in% c(21:24) & df$mode_spw %in% c(21:24) & df_gfc$av_gfc <= 30 & df$mode_esa %in% c(1) ,]$out      <- 
-      df[df$mode_spk %in% c(21:24) & df$mode_spw %in% c(21:24) & df_gfc$av_gfc <= 30 & df$mode_esa %in% c(1),]$mode_spk
-  },error=function(e){cat("Not relevant\n")})
-  
-  tryCatch({
-    df[df$mode_spk %in% c(21:24) & df$mode_spw %in% c(21:24) & df_gfc$av_gfc <= 30 & !(df$mode_esa %in% c(1)) ,]$out      <- 33
+    df[df$mode_spk %in% c(21:24) & df$mode_spw %in% c(21:24),]$out      <- 
+      df[df$mode_spk %in% c(21:24) & df$mode_spw %in% c(21:24),]$mode_spk
   },error=function(e){cat("Not relevant\n")})
   
   tryCatch({
@@ -300,13 +294,8 @@ for(province in provinces[11:15]){
   },error=function(e){cat("Not relevant\n")})
   
   tryCatch({
-    df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2) & df_gfc$av_gfc > 30,]$out  <-
-      df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2) & df_gfc$av_gfc > 30,]$mode_spk
-  },error=function(e){cat("Not relevant\n")})
-  
-  tryCatch({
-    df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2) & df_gfc$av_gfc <= 30,]$out  <-
-      df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2) & df_gfc$av_gfc <= 30,]$mode_spw
+    df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2),]$out  <-
+      df[df$mode_spk %in% c(21:26) & df$mode_spw %in% c(11:13,31:33) & df$mode_esa %in% c(0,1,2),]$mode_spk
   },error=function(e){cat("Not relevant\n")})
   
   tryCatch({
@@ -504,7 +493,7 @@ for(province in provinces[11:15]){
   
   
   
-  write.table(df[,c("clump_id","total_spk","out")],
+  write.table(df[,c("clump_id","total_spk","out","mode_spk","mode_spw","mode_esa","sd_gfc")],
               paste0(seg_dir,province,"_reclass.txt"),row.names = F,col.names = F)
   
   
@@ -536,7 +525,7 @@ for(province in provinces[11:15]){
   #################### COMPRESS
   system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
                  paste0(seg_dir,"tmp_pct_decision_tree.tif"),
-                 paste0(res_dir,province,"_decision_tree_20180515.tif")
+                 paste0(res_dir,province,"_decision_tree_20180521.tif")
   ))
   
   system(sprintf("rm %s",
