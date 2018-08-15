@@ -30,7 +30,7 @@ tiles          <- substr(
 #################### LOPP THROUGH EACH SUBSET --> START WITH ONE tile ONLY [1], Cabo Delgado
 #################### ONCE YOU HAVE RUN FOR ONE tile. DOWNLOAD AND VERIFY
 #################### IF ALL GOOD, DELETE [1] below and RUN FOR ALL tileS
-for(tile in tiles[1]){
+for(tile in tiles[41:60]){
 
   the_segments <- paste0(seg_tile_dir,tile,".tif")
   
@@ -197,7 +197,7 @@ for(tile in tiles[1]){
   names(df_spc_w)  <- c("clump_id","total_spw",paste0("spw_",0:max(my_classes)))
   names(df_gfc)    <- c("clump_id","total_gfc","av_gfc","sd_gfc")
   names(df_esa)    <- c("clump_id","total_esa",paste0("esa_",0:10))
-  hist(df_gfc$sd_gfc)
+  hist(df_gfc$av_gfc)
   
   ####### INITIATE THE OUT DATAFRAME
   df <- df_spc_k[,c("clump_id","total_spk")]
@@ -206,7 +206,7 @@ for(tile in tiles[1]){
   df$mode_esa <- c(0:10)[max.col(df_esa[,paste0("esa_",0:10)])]
   df$mode_spk <- c(0:max(my_classes))[max.col(df_spc_k[,paste0("spk_",0:max(my_classes))])]
   df$mode_spw <- c(0:max(my_classes))[max.col(df_spc_w[,paste0("spw_",0:max(my_classes))])]
-  df$sd_gfc   <- df_gfc$sd_gfc
+  df$av_gfc   <- df_gfc$av_gfc
   
   table(df$mode_spk,df$mode_spw)
   table(df$mode_esa,df$mode_spk)

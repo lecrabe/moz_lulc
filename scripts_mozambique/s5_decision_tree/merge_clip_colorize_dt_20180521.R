@@ -10,7 +10,7 @@
 ### MERGE AS VRT
 system(sprintf("gdalbuildvrt %s %s",
                paste0(res_dir,"tmp_merge.vrt"),
-               paste0(res_dir,"*_decision_tree_20180521.tif")
+               paste0(res_dir,"segment_tile*_decision_tree_20180523.tif")
 ))
 
 system(sprintf("gdalwarp -t_srs %s -co COMPRESS=LZW %s %s",
@@ -50,7 +50,7 @@ system(sprintf("(echo %s) | oft-addpct.py %s %s",
 #################### COMPRESS
 system(sprintf("gdal_translate -ot Byte -co COMPRESS=LZW %s %s",
                paste0(res_dir,"tmp_pct_dt_merge_clip.tif"),
-               paste0(res_dir,"moz_lulc2016_20180521.tif")
+               paste0(res_dir,"moz_lulc2016_20180525.tif")
 ))
 # #############################################################
 # ### CLEAN
