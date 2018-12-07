@@ -58,3 +58,10 @@ my_colors  <- col2rgb(c("brown","yellow","yellow", # agriculture
                         "grey1","grey2","grey3" # other
 ))
 #colors()
+
+l3cl <- read.csv(paste0(datadir,"lulc_code_l3hybrid.csv"))
+my_classes_l3 <- l3cl$code_l3_byte
+l3cl[l3cl$color == "light purple",]$color <- "medium purple"
+
+my_colors_l3  <- col2rgb(gsub(pattern = " ",replacement = "",x=l3cl$color))
+

@@ -116,7 +116,7 @@ df2[df2$ref_code_l1 == 6 & df2$element_cover_bare > 9  ,]$pure_class <- 1
 
 df3 <- df2[df2$pure_class ==1,]
 table(df3$ref_code_l1,df3$element_cover_tree)
-write.csv(df3,paste0(res_dir,"map_vs_ref_20171208.csv"),row.names = F)
+write.csv(df3,paste0(res_dir,"map_vs_ref_20181102.csv"),row.names = F)
 
 omissions <- df3[df3$ref_code_l1 == 2 & df3$map_code_l1 == 1,]
 table(omissions$ref_code_l1,omissions$map_code_l1)
@@ -164,4 +164,4 @@ names(areas_l1) <- "map_area"
 areas_l1$map_code_l1 <- rownames(areas_l1)
 sum(areas_l1$map_area)
 
-write.csv(areas_l1,paste0(res_dir,"areas_l1_20171208.csv"),row.names = F)
+write.csv(areas_l1,paste0(res_dir,"areas_l1_20181102_AD.csv"),row.names = F)
